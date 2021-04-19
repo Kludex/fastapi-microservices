@@ -21,7 +21,7 @@ class Settings(BaseSettings):
             user=values.get("POSTGRES_USER"),
             password=password.get_secret_value(),
             host=values.get("POSTGRES_HOST"),
-            db=values.get("POSTGRES_DB") or "",
+            db=values.get("POSTGRES_DB"),
         )
 
 
