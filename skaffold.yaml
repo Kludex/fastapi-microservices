@@ -1,0 +1,15 @@
+apiVersion: skaffold/v2beta10
+kind: Config
+build:
+  artifacts:
+    - image: users-service
+      context: users
+deploy:
+  kubectl:
+    manifests:
+      - users/k8s/*
+portForward:
+  - resourceType: deployment
+    resourceName: users-service
+    port: 80
+    localPort: 8000
