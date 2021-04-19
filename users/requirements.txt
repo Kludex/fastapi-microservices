@@ -1,0 +1,5 @@
+sqlalchemy==1.4.9
+asyncpg==0.22.0
+
+# TODO(Marcelo): Add dev requirements.
+pytest==6.2.3

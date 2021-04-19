@@ -1,4 +1,4 @@
-apiVersion: skaffold/v2beta10
+apiVersion: skaffold/v2beta14
 kind: Config
 build:
   artifacts:
@@ -10,6 +10,10 @@ deploy:
       - k8s/*
 portForward:
   - resourceType: deployment
-    resourceName: users-service
+    resourceName: users-deployment
     port: 80
     localPort: 8000
+test:
+  - image: users-service
+    custom:
+      - command: pytest

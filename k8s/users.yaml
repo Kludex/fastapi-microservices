@@ -3,33 +3,44 @@ kind: Service
 metadata:
   name: users-service
   labels:
-    app: users-service
+    app: users
 spec:
   type: NodePort
   ports:
-    - targetPort: 80
-      port: 80
+    - targetPort: 8000
+      port: 8000
   selector:
-    app: users-service
+    app: users
 ---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: users-service
+  name: users-deployment
   labels:
-    app: users-service
+    app: users
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: users-service
+      app: users
   template:
     metadata:
       labels:
-        app: users-service
+        app: users
     spec:
       containers:
         - name: users-service
           image: users-service
           ports:
-            - containerPort: 80
+            - containerPort: 8000
+          env:
+            - name: POSTGRES_HOST
+              value: "postgres-service"
+            - name: POSTGRES_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: postgres-credentials
+                  key: password
+          envFrom:
+            - configMapRef:
+                name: postgres-configuration
