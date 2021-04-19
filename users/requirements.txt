@@ -1,6 +1,8 @@
 sqlalchemy==1.4.9
 asyncpg==0.22.0
 pyhumps==1.6.1
+tenacity==7.0.0
+alembic==1.5.8
 
 # TODO(Marcelo): Add dev requirements.
 pytest==6.2.3

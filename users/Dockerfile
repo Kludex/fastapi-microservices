@@ -1,11 +1,15 @@
 FROM tiangolo/uvicorn-gunicorn-fastapi:python3.8-slim
 
-# TODO(Marcelo): Change WORKDIR and PYTHONPATH.
-ENV PYTHONPATH /
+WORKDIR /app
+ENV PYTHONPATH /app
+ENV PRE_START_PATH /app/scripts/prestart.sh
 
 COPY ./requirements.txt /app/requirements.txt
 RUN pip install --upgrade pip && \
     pip install -r requirements.txt && \
     rm /app/requirements.txt
 
-COPY ./app /app
+COPY ./scripts /app/scripts
+COPY ./alembic.ini /app/alembic.ini
+COPY ./migrations /app/migrations
+COPY ./app /app/app
