@@ -1,5 +1,6 @@
 FROM tiangolo/uvicorn-gunicorn-fastapi:python3.8-slim
 
+# TODO(Marcelo): Change WORKDIR and PYTHONPATH.
 ENV PYTHONPATH /
 
 COPY ./requirements.txt /app/requirements.txt
