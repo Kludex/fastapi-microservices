@@ -1,5 +1,10 @@
 sqlalchemy==1.4.9
 asyncpg==0.22.0
+pyhumps==1.6.1
 
 # TODO(Marcelo): Add dev requirements.
 pytest==6.2.3
+flake8==3.9.1
+isort==5.8.0
+black==20.8b1
+mypy==0.812
