@@ -16,3 +16,4 @@ Forked from [here](https://github.com/fkromer/fastapi-microservice-patterns/tree
 * [Running Flask on Kubernetes](https://testdriven.io/blog/running-flask-on-kubernetes/)
 * [Add Asynchronous SQLAlchemy example](https://github.com/tiangolo/fastapi/pull/2331)
 * [Asynchronous I/O (asyncio) SQLALchemy documentation](https://docs.sqlalchemy.org/en/14/orm/extensions/asyncio.html)
+* [Full Stack FastAPI and PostgreSQL - Base Project Generator](https://github.com/tiangolo/full-stack-fastapi-postgresql)
