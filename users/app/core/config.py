@@ -1,6 +1,6 @@
 from typing import Any, Dict, Optional
 
-from pydantic import BaseSettings, SecretStr, validator
+from pydantic import BaseSettings, EmailStr, SecretStr, validator
 
 
 class Settings(BaseSettings):
@@ -23,6 +23,9 @@ class Settings(BaseSettings):
             host=values.get("POSTGRES_HOST"),
             db=values.get("POSTGRES_DB"),
         )
+
+    FIRST_USER_EMAIL: EmailStr
+    FIRST_USER_PASSWORD: SecretStr
 
 
 settings = Settings()

@@ -12,6 +12,15 @@ spec:
   selector:
     app: users
 ---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: users-credentials
+type: Opaque
+data:
+  email: YWRtaW5AYWRtaW4uY29t
+  password: cGFzc3dvcmQ=
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -40,6 +49,16 @@ spec:
               valueFrom:
                 secretKeyRef:
                   name: postgres-credentials
+                  key: password
+            - name: FIRST_USER_EMAIL
+              valueFrom:
+                secretKeyRef:
+                  name: users-credentials
+                  key: email
+            - name: FIRST_USER_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: users-credentials
                   key: password
           envFrom:
             - configMapRef:
