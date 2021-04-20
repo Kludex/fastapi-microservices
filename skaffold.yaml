@@ -14,6 +14,6 @@ portForward:
     port: 80
     localPort: 8000
 test:
-  - image: users-service
+  - image: users-deployment
     custom:
       - command: pytest
