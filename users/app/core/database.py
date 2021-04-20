@@ -16,8 +16,3 @@ class Base:
     @declared_attr
     def __tablename__(cls) -> str:
         return humps.depascalize(cls.__name__)
-
-
-async def get_session():
-    async with SessionLocal() as session:
-        yield session

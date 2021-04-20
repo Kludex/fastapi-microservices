@@ -27,5 +27,8 @@ class Settings(BaseSettings):
     FIRST_USER_EMAIL: EmailStr
     FIRST_USER_PASSWORD: SecretStr
 
+    SECRET_KEY: SecretStr
+    ACCESS_TOKEN_EXPIRE_MINUTES: int
+
 
 settings = Settings()

@@ -1,12 +1,12 @@
 from fastapi import APIRouter, Depends
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from app.core.database import get_session
+from app.api.deps import get_session, get_token_data
 
 router = APIRouter(prefix="/home", tags=["Home"])
 
 
-@router.get("/")
+@router.get("/", dependencies=[Depends(get_token_data)])
 async def home():
     return "Hello World!"
 

@@ -7,6 +7,7 @@ from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.core.config import settings
 from app.core.database import SessionLocal
+from app.core.security import get_password_hash
 from app.models.users import User
 
 logging.basicConfig(level=logging.INFO)
@@ -15,7 +16,7 @@ logger = logging.getLogger(__name__)
 
 async def create_first_user(session: AsyncSession) -> None:
     email = settings.FIRST_USER_EMAIL
-    password = settings.FIRST_USER_PASSWORD.get_secret_value()
+    password = get_password_hash(settings.FIRST_USER_PASSWORD.get_secret_value())
     result = await session.execute(select(User).where(User.email == email))
     user: Optional[User] = result.scalars().first()
     if user is None:

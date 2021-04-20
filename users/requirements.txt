@@ -5,6 +5,8 @@ tenacity==7.0.0
 alembic==1.5.8
 pydantic[email]==1.8.1
 passlib[bcrypt]==1.7.4
+python-jose==3.2.0
+python-multipart==0.0.5
 
 # TODO(Marcelo): Add dev requirements.
 pytest==6.2.3
