@@ -3,32 +3,23 @@ import asyncio
 import pytest
 from asgi_lifespan import LifespanManager
 from httpx import AsyncClient
-from sqlalchemy import event
-from sqlalchemy.ext.asyncio import AsyncSession
+from sqlalchemy.ext.asyncio import AsyncConnection, AsyncSession
 
 from app.core.database import engine, get_session
 from app.main import app
 
 
-@pytest.fixture(autouse=True)
-async def session():
-    """Reference: https://github.com/sqlalchemy/sqlalchemy/issues/5811"""
-    async with engine.connect() as conn:
-        await conn.begin()
-        await conn.begin_nested()
-        async_session = AsyncSession(conn)
-
-        @event.listens_for(async_session.sync_session, "after_transaction_end")
-        def end_savepoint(session, transaction):
-            if conn.closed:
-                return
-
-            if not conn.in_nested_transaction():
-                conn.sync_connection.begin_nested()
-
-        yield async_session
-        await async_session.close()
+@pytest.fixture()
+async def connection():
+    async with engine.begin() as conn:
+        yield conn
         await conn.rollback()
+
+
+@pytest.fixture()
+async def session(connection: AsyncConnection):
+    async with AsyncSession(connection, expire_on_commit=False) as _session:
+        yield _session
 
 
 @pytest.fixture(autouse=True)
