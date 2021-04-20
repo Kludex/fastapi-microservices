@@ -1,6 +1,6 @@
 # FastAPI Microservices
 
-Forked from [here](https://github.com/fkromer/fastapi-microservice-patterns/tree/main/hello-skaffold).
+The goal of this project is to have a FastAPI project up-to-date with the latest technologies.
 
 ## Usage
 
