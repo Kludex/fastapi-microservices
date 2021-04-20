@@ -12,4 +12,5 @@ RUN pip install --upgrade pip && \
 COPY ./scripts /app/scripts
 COPY ./alembic.ini /app/alembic.ini
 COPY ./migrations /app/migrations
+COPY ./tests /app/tests
 COPY ./app /app/app
