@@ -35,7 +35,7 @@ def event_loop():
     loop.close()
 
 
-@pytest.fixture(scope="function")
+@pytest.fixture()
 async def client():
     async with AsyncClient(app=app, base_url="http://test") as ac, LifespanManager(app):
         yield ac
