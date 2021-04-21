@@ -7,10 +7,10 @@ from app.core.security import create_access_token
 from app.crud import users as crud_user
 from app.schemas.token import Token
 
-router = APIRouter(prefix="/login", tags=["Login"])
+router = APIRouter(tags=["Login"])
 
 
-@router.post("/", response_model=Token)
+@router.post("/login/", response_model=Token)
 async def login(
     data: OAuth2PasswordRequestForm = Depends(),
     session: AsyncSession = Depends(get_session),

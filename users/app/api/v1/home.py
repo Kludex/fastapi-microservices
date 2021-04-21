@@ -11,6 +11,6 @@ async def home():
     return "Hello World!"
 
 
-@router.get("/another")
+@router.get("/another/")
 async def another(session: AsyncSession = Depends(get_session)):
     await session.execute("SELECT 1")

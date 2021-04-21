@@ -4,6 +4,12 @@ build:
   artifacts:
     - image: users-service
       context: users
+      docker:
+        dockerfile: docker/backend.dockerfile
+    - image: users-worker-service
+      context: users
+      docker:
+        dockerfile: docker/worker.dockerfile
 deploy:
   kubectl:
     manifests:
