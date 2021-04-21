@@ -8,6 +8,9 @@ passlib[bcrypt]==1.7.4
 python-jose==3.2.0
 python-multipart==0.0.5
 
+arq==0.19.1
+uvloop==0.15.2
+
 # TODO(Marcelo): Add dev requirements.
 pytest==6.2.3
 pytest-asyncio==0.15.0
