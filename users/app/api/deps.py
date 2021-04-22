@@ -7,7 +7,7 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from app.core.config import settings
 from app.core.database import SessionLocal
 from app.core.security import ALGORITHM
-from app.crud import users as crud_user
+from app.crud.users import crud_user
 from app.models.users import User
 from app.schemas.token import TokenPayload
 
@@ -33,7 +33,7 @@ async def get_current_user(
     token: str = Depends(get_token_data),
     session: AsyncSession = Depends(get_session),
 ):
-    user = await crud_user.get_user_by_id(session, id=token.user_id)
+    user = await crud_user.get(session, id=token.user_id)
     if user is None:
         raise HTTPException(status_code=404, detail="User not found")
     if not user.is_active:
