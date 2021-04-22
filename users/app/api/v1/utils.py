@@ -3,7 +3,7 @@ from fastapi import APIRouter, Depends
 from app.api.deps import get_current_user
 from app.core import redis
 from app.models.users import User
-from app.schemas.jobs import Job
+from app.schemas.job import Job
 
 router = APIRouter(prefix="/utils", tags=["Utils"])
 
