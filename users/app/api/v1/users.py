@@ -13,9 +13,9 @@ from app.api.deps import (
 from app.core.security import get_password_hash
 from app.crud.users import crud_user
 from app.models.users import User
-from app.schemas.user import UserCreate, UserInDB, UserOut, UserUpdate, UserUpdateDB
+from app.schemas.user import UserCreate, UserInDB, UserOut, UserUpdate
 
-router = APIRouter(prefix="/users")
+router = APIRouter(prefix="/users", tags=["Users"])
 
 
 @router.get("/", response_model=List[UserOut], dependencies=[Depends(on_superuser)])
