@@ -1,11 +1,30 @@
-from typing import Optional
+from typing import List, Optional
 
 from pydantic import EmailStr
 from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from app.core.security import is_valid_password
+from app.core.security import get_password_hash, is_valid_password
 from app.models.users import User
+from app.schemas.user import UserCreate
+
+
+async def create(session: AsyncSession, user_in: UserCreate) -> User:
+    hashed_password = get_password_hash(user_in.password)
+    user = User(
+        **user_in.dict(exclude={"password"}, exclude_none=True),
+        hashed_password=hashed_password
+    )
+    session.add(user)
+    await session.commit()
+    return user
+
+
+async def get_multi(
+    session: AsyncSession, *, skip: int = 0, limit: int = 100
+) -> List[User]:
+    result = await session.execute(select(User).offset(skip).limit(limit))
+    return result.scalars().all()
 
 
 async def get_user_by_id(session: AsyncSession, id: int) -> Optional[User]:
