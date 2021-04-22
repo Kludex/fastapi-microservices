@@ -1,4 +1,4 @@
-sqlalchemy==1.4.9
+sqlalchemy==1.4.11
 asyncpg==0.22.0
 pyhumps==1.6.1
 tenacity==7.0.0
