@@ -3,8 +3,7 @@ from fastapi.security import OAuth2PasswordRequestForm
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.api.deps import get_session
-from app.core.security import create_access_token
-from app.crud import users as crud_user
+from app.core.security import authenticate, create_access_token
 from app.schemas.token import Token
 
 router = APIRouter(tags=["Login"])
@@ -15,9 +14,7 @@ async def login(
     data: OAuth2PasswordRequestForm = Depends(),
     session: AsyncSession = Depends(get_session),
 ):
-    user = await crud_user.authenticate(
-        session, email=data.username, password=data.password
-    )
+    user = await authenticate(session, email=data.username, password=data.password)
     if user is None:
         raise HTTPException(status_code=400, detail="Incorrect email or password")
     if not user.is_active:

@@ -16,5 +16,19 @@ class UserCreate(UserBase):
 
 
 class UserOut(UserBase):
+    id: int
+
     class Config:
         orm_mode = True
+
+
+class UserInDB(UserBase):
+    hashed_password: str
+
+
+class UserUpdate(UserBase):
+    password: Optional[str] = None
+
+
+class UserUpdateDB(UserBase):
+    hashed_password: str
