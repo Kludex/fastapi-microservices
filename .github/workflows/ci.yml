@@ -1,0 +1,30 @@
+name: Tests
+
+on: [push]
+
+jobs:
+  tests:
+    name: Tests
+    runs-on: ubuntu-latest
+
+    services:
+      postgres:
+        image: postgres:12
+        env:
+          POSTGRES_USER: user
+          POSTGRES_PASSWORD: password
+          POSTGRES_DB: app
+        ports:
+          - 5432:5432
+
+    steps:
+      - name: Checkout working branch
+        uses: actions/checkout@v1
+
+      - name: Set up Python 3.8
+        uses: actions/setup-python@v1
+        with:
+          python-version: 3.8
+  #         kubectl get pods
+  #         POD=$(kubectl get pod -l app=users -o jsonpath="{.items[0].metadata.name}")
+  #         kubectl exec ${POD} -- pytest -v tests
