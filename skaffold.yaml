@@ -2,11 +2,11 @@ apiVersion: skaffold/v2beta14
 kind: Config
 build:
   artifacts:
-    - image: users-service
+    - image: users
       context: users
       docker:
         dockerfile: docker/backend.dockerfile
-    - image: users-worker-service
+    - image: users-worker
       context: users
       docker:
         dockerfile: docker/worker.dockerfile
@@ -19,7 +19,3 @@ portForward:
     resourceName: users-deployment
     port: 80
     localPort: 8000
-test:
-  - image: users-deployment
-    custom:
-      - command: pytest

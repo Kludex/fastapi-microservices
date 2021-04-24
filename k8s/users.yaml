@@ -48,8 +48,8 @@ spec:
         app: users
     spec:
       containers:
-        - name: users-service
-          image: users-service
+        - name: users
+          image: users
           ports:
             - containerPort: 8000
           env:
