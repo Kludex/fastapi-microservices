@@ -27,7 +27,7 @@ jobs:
         with:
           context: users
           push: true
-          file: docker/backend.dockerfile
+          file: users/docker/backend.dockerfile
           tags: localhost:5000/users:latest
 
       - name: Inspect
