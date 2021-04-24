@@ -1,10 +1,9 @@
-name: Example workflow
+name: Tests
 
 on: [push, pull_request]
 
 jobs:
-  example:
-    name: Example Minikube-Kubernetes Cluster interaction
+  test:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
