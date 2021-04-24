@@ -29,8 +29,8 @@ spec:
         app: users-worker
     spec:
       containers:
-        - name: users-worker-service
-          image: users-worker-service
+        - name: users-worker
+          image: users-worker
           ports:
             - containerPort: 8000
           env:
