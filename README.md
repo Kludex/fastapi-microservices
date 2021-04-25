@@ -38,8 +38,6 @@ Unfortunately, there were few that I could take as reference. 😅
 
 The only one that I've used for that purpose for a long time was the mentioned "full-stack-fastapi-postgresql". But as the time passed, I started to have my own vision about how a FastAPI project should be organized, and which technologies should be used as recommendation.
 
-As a disclaimer, I'm [very active in the FastAPI community](https://fastapi.tiangolo.com/fastapi-people/#experts).
-
 ## References
 
 * [django-postgres-skaffold-k8s](https://github.com/ksaaskil/django-postgres-skaffold-k8s)
