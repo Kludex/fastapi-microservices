@@ -48,6 +48,29 @@ spec:
       labels:
         app: users
     spec:
+      initContainers:
+        - name: wait-database
+          image: busybox:1.28
+          command:
+            [
+              "sh",
+              "-c",
+              "until nslookup postgres-service.$(cat /var/run/secrets/kubernetes.io/serviceaccount/namespace).svc.cluster.local; do echo waiting for mydb; sleep 2; done",
+            ]
+        - name: perform-migrations
+          image: users
+          command: ["alembic", "upgrade", "head"]
+          env:
+            - name: POSTGRES_HOST
+              value: "postgres-service"
+            - name: POSTGRES_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: postgres-credentials
+                  key: password
+          envFrom:
+            - configMapRef:
+                name: postgres-configuration
       containers:
         - name: users
           image: users
