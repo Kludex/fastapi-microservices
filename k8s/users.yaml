@@ -20,6 +20,7 @@ metadata:
     app: users
 data:
   ACCESS_TOKEN_EXPIRE_MINUTES: "10"
+  PROJECT_NAME: "Users Microservice"
 ---
 apiVersion: v1
 kind: Secret
