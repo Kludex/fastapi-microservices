@@ -18,7 +18,7 @@ The full stack of this project is composed by:
 ## Installation
 
 It's possible to develop either with [Skaffold](https://skaffold.dev/) or [Tilt](https://tilt.dev/).
-You should check how to install either of those, but for now I recommend Tilt.
+You should check how to install one of those, but for now I recommend Tilt.
 
 After installing the above, you should be able to run the following:
 
