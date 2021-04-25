@@ -4,6 +4,8 @@ from pydantic import BaseSettings, EmailStr, SecretStr, validator
 
 
 class Settings(BaseSettings):
+    PROJECT_NAME: str
+
     POSTGRES_DB: str
     POSTGRES_HOST: str
     POSTGRES_USER: str
