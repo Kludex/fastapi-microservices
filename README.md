@@ -13,25 +13,17 @@ The full stack of this project is composed by:
 * [PostgreSQL](https://redis.io/) - The World's Most Advanced Open Source Relational Database
 * [Redis](https://www.postgresql.org/) - An open source (BSD licensed), in-memory data structure store, used as a database, cache, and message broker.
 * [Tilt](https://tilt.dev/) - A multi-service dev environment for teams on Kubernetes.
-* [Skaffold](https://skaffold.dev/) [Optional] - Easy and Repeatable Kubernetes Development.
 
 ## Installation
 
-It's possible to develop either with [Skaffold](https://skaffold.dev/) or [Tilt](https://tilt.dev/).
-You should check how to install one of those, but for now I recommend Tilt.
+For development purposes, we're going to use [Tilt](https://tilt.dev/).
+Please install it, so we can continue.
 
 After installing the above, you should be able to run the following:
 
 ``` bash
 minikube start
 tilt up
-```
-
-In case you've chosen Skaffold:
-
-``` bash
-minikube start
-skaffold run --port-forward
 ```
 
 **The project generator is under development.**
