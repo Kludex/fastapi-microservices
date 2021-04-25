@@ -1,7 +1,6 @@
 from fastapi import APIRouter, Depends
-from sqlalchemy.ext.asyncio import AsyncSession
 
-from app.api.deps import get_session, get_token_data
+from app.api.deps import get_token_data
 
 router = APIRouter(prefix="/home", tags=["Home"])
 
@@ -12,5 +11,5 @@ async def home():
 
 
 @router.get("/another/")
-async def another(session: AsyncSession = Depends(get_session)):
-    await session.execute("SELECT 1")
+async def another():
+    return "Another Hello World!"
