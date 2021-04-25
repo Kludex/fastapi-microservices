@@ -26,6 +26,8 @@ async def init() -> None:
     except Exception as exc:
         logger.error(exc)
         raise exc
+    finally:
+        await session.close()
 
 
 async def main() -> None:
