@@ -1,6 +1,7 @@
 from arq import create_pool
 from arq.connections import RedisSettings
 from fastapi import FastAPI
+from fastapi.routing import APIRoute
 
 from app.api import router
 from app.core import redis
