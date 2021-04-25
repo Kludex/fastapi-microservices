@@ -50,13 +50,16 @@ spec:
     spec:
       initContainers:
         - name: wait-database
-          image: busybox:1.28
+          image: postgres:12
           command:
             [
               "sh",
               "-c",
-              "until nslookup postgres-service.$(cat /var/run/secrets/kubernetes.io/serviceaccount/namespace).svc.cluster.local; do echo waiting for mydb; sleep 2; done",
+              "until pg_isready -h ${POSTGRES_HOST};  do echo waiting for database; sleep 2; done;",
             ]
+          env:
+            - name: POSTGRES_HOST
+              value: "postgres-service"
         - name: perform-migrations
           image: users
           command: ["alembic", "upgrade", "head"]
@@ -76,6 +79,12 @@ spec:
           image: users
           ports:
             - containerPort: 80
+          livenessProbe:
+            initialDelaySeconds: 3
+            periodSeconds: 5
+            httpGet:
+              path: /api/health/
+              port: 80
           env:
             - name: REDIS_HOST
               value: "redis-service"
