@@ -1,0 +1,31 @@
+[tool.poetry]
+name = "users"
+version = "0.1.0"
+description = ""
+authors = ["Marcelo Trylesinski <marcelotryle@gmail.com>"]
+
+[tool.poetry.dependencies]
+python = "^3.8"
+SQLAlchemy = "^1.4.11"
+asyncpg = "^0.22.0"
+pyhumps = "^1.6.1"
+alembic = "^1.5.8"
+pydantic = {extras = ["email"], version = "^1.8.1"}
+passlib = {extras = ["bcrypt"], version = "^1.7.4"}
+python-jose = "^3.2.0"
+python-multipart = "^0.0.5"
+fastapi = "^0.63.0"
+
+[tool.poetry.dev-dependencies]
+pytest = "6.2.3"
+pytest-asyncio = "^0.15.1"
+flake8 = "^3.9.1"
+black = "^20.8b1"
+isort = "^5.8.0"
+mypy = "^0.812"
+httpx = "^0.17.1"
+asgi-lifespan = "^1.0.1"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
