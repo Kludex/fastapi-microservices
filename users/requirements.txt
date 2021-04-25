@@ -1,7 +1,6 @@
 sqlalchemy==1.4.9
 asyncpg==0.22.0
 pyhumps==1.6.1
-tenacity==7.0.0
 alembic==1.5.8
 pydantic[email]==1.8.1
 passlib[bcrypt]==1.7.4
