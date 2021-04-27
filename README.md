@@ -10,8 +10,8 @@ The full stack of this project is composed by:
 
 * [FastAPI](https://fastapi.tiangolo.com/) - A modern, fast (high-performance), web framework for building APIs with Python 3.6+ based on standard Python type hints.
 * [ARQ](https://arq-docs.helpmanual.io/) - Job queues and RPC in python with asyncio and redis.
-* [PostgreSQL](https://redis.io/) - The World's Most Advanced Open Source Relational Database
-* [Redis](https://www.postgresql.org/) - An open source (BSD licensed), in-memory data structure store, used as a database, cache, and message broker.
+* [PostgreSQL](https://www.postgresql.org/) - The World's Most Advanced Open Source Relational Database
+* [Redis](https://redis.io/) - An open source (BSD licensed), in-memory data structure store, used as a database, cache, and message broker.
 * [Tilt](https://tilt.dev/) - A multi-service dev environment for teams on Kubernetes.
 
 ## Installation
