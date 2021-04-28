@@ -11,6 +11,6 @@ async def test_login(client: AsyncSession):
         "password": settings.FIRST_USER_PASSWORD.get_secret_value(),
     }
     res = await client.post("/api/v1/login/", data=login_data)
-    assert res.status_code == 200
+    assert res.status_code == 200, res.json()
     assert res.json().get("token_type") == "bearer"
     assert "access_token" in res.json().keys()

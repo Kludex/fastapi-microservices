@@ -38,7 +38,7 @@ format:  ## Format code
 tests:  ## Run tests
 	@echo "🍜 Running tests..."
 	@$(eval POD=$(shell sh -c 'kubectl get pod -l app=users -o jsonpath="{.items[0].metadata.name}"'))
-	@kubectl exec $(POD) -- pytest -v tests
+	@kubectl exec $(POD) -- pytest -v tests --cov app --cov-report=term-missing:skip-covered --cov-report=xml --cov-fail-under 69
 
 
 .PHONY: migrations

@@ -1,0 +1,71 @@
+name: CI
+
+on: [push]
+
+jobs:
+  tests:
+    name: Setup
+    runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:12
+        env:
+          POSTGRES_USER: user
+          POSTGRES_PASSWORD: password
+          POSTGRES_DB: app
+        ports:
+          - 5432:5432
+      redis:
+        image: redis:alpine
+        ports:
+          - 6379:6379
+    steps:
+      - name: Checkout working branch
+        uses: actions/checkout@v2
+
+      - name: Set up Python 3.8
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.8
+
+      - name: Cache pip
+        uses: actions/cache@v2
+        with:
+          path: ~/.cache/pip
+          key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements.txt') }}
+          restore-keys: |
+            ${{ runner.os }}-pip-
+
+      - name: Set environment variables
+        run: |
+          echo "PYTHONPATH=$(pwd)/users" >> $GITHUB_ENV
+          echo "POSTGRES_DB=app" >> $GITHUB_ENV
+          echo "POSTGRES_HOST=localhost:5432" >> $GITHUB_ENV
+          echo "POSTGRES_USER=user" >> $GITHUB_ENV
+          echo "POSTGRES_PASSWORD=password" >> $GITHUB_ENV
+          echo "PROJECT_NAME=Project" >> $GITHUB_ENV
+          echo "FIRST_USER_EMAIL=user@user.com" >> $GITHUB_ENV
+          echo "FIRST_USER_PASSWORD=user" >> $GITHUB_ENV
+          echo "SECRET_KEY=secret" >> $GITHUB_ENV
+          echo "ACCESS_TOKEN_EXPIRE_MINUTES=10" >> $GITHUB_ENV
+          echo "REDIS_HOST=localhost" >> $GITHUB_ENV
+          echo "REDIS_PORT=6379" >> $GITHUB_ENV
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r users/requirements.txt
+
+      - name: Lint
+        run: make lint
+
+      - name: Database migrations
+        run: |
+          cd users
+          alembic upgrade head
+
+      - name: Create initial data
+        run: python users/scripts/initial_data.py
+
+      - name: Test
+        run: pytest users/tests --cov users/app --cov-report=term-missing:skip-covered --cov-report=xml --cov-fail-under 69

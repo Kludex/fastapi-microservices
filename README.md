@@ -47,6 +47,8 @@ The only one that I've used for that purpose for a long time was the mentioned "
 * [Asynchronous I/O (asyncio) SQLALchemy documentation](https://docs.sqlalchemy.org/en/14/orm/extensions/asyncio.html)
 * [Full Stack FastAPI and PostgreSQL - Base Project Generator](https://github.com/tiangolo/full-stack-fastapi-postgresql)
 * [The inner working of ARQ](https://threeofwands.com/the-inner-workings-of-arq/)
+* [How we set up a production CI workflow with GitHub actions](https://insights.project-a.com/how-we-set-up-a-production-ci-workflow-with-github-actions-cc1e2aacd9da)
+* [Using GitHub to deploy kubernetes](https://insights.project-a.com/using-github-actions-to-deploy-to-kubernetes-122c653c0b09)
 
 ## License
 
