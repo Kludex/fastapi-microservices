@@ -69,3 +69,30 @@ jobs:
 
       - name: Test
         run: pytest users/tests --cov users/app --cov-report=term-missing:skip-covered --cov-report=xml --cov-fail-under 69
+
+  # NOTE: Commented until deployment setup is ready.
+  # docker-image:
+  #   name: Build & Publish Docker Image
+  #   needs: [tests]
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - name: Checkout working branch
+  #       uses: actions/checkout@v2
+  #     - name: Set Docker Registry
+  #       run: echo "DOCKER_REGISTRY=eu.gcr.io" >> $GITHUB_ENV
+  #     - name: Set Docker Image
+  #       run: echo "DOCKER_IMAGE=$(DOCKER_REGISTRY)/fastapi-microservices/backend" >> $GITHUB_ENV
+  #     - name: Login to Google Cloud Registry
+  #       id: gcloud
+  #       uses: elgohr/gcloud-login-action@0.2
+  #       with:
+  #         account_key: ${{ secrets.GCLOUD_KEY }}
+  #     - name: Publish Docker Image
+  #       uses: elgohr/Publish-Docker-Github-Action@3.04
+  #       with:
+  #         name: ${{ env.DOCKER_IMAGE }}
+  #         username: ${{ steps.gcloud.outputs.username }}
+  #         password: ${{ steps.gcloud.outputs.password }}
+  #         registry: ${{ env.DOCKER_REGISTRY }}
+  #         context: users/docker
+  #         dockerfile: backend.dockerfile
