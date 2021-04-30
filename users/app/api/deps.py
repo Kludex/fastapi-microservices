@@ -50,3 +50,4 @@ def get_current_superuser(current_user: User = Depends(get_current_user)) -> Use
 
 
 on_superuser = get_current_superuser
+on_user = get_current_user

@@ -7,9 +7,19 @@ from httpx import AsyncClient
 from sqlalchemy.ext.asyncio import AsyncConnection, AsyncSession
 
 from app.api.deps import get_session
-from app.core.config import settings
 from app.core.database import engine
 from app.main import app
+from tests.utils import (
+    get_normal_token_headers,
+    get_superuser_token_headers,
+    initial_data,
+)
+
+
+@pytest.fixture(scope="session", autouse=True)
+async def initial_resources():
+    async with AsyncSession(engine, expire_on_commit=False) as session:
+        await initial_data(session)
 
 
 @pytest.fixture()
@@ -46,10 +56,11 @@ async def client():
 
 @pytest.fixture()
 async def superuser_token_headers(client: AsyncClient) -> Dict[str, str]:
-    login_data = {
-        "username": settings.FIRST_USER_EMAIL,
-        "password": settings.FIRST_USER_PASSWORD.get_secret_value(),
-    }
-    res = await client.post("/api/v1/login/", data=login_data)
-    access_token = res.json()["access_token"]
+    access_token = await get_superuser_token_headers(client)
+    return {"Authorization": f"Bearer {access_token}"}
+
+
+@pytest.fixture()
+async def normal_token_headers(client: AsyncClient) -> Dict[str, str]:
+    access_token = await get_normal_token_headers(client)
     return {"Authorization": f"Bearer {access_token}"}
