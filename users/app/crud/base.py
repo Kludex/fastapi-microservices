@@ -49,7 +49,7 @@ class CRUDBase(Generic[ModelType, CreateSchemaType, UpdateSchemaType]):
         db_obj: Optional[ModelType] = None,
         **kwargs
     ) -> Optional[ModelType]:
-        db_obj = db_obj or self.get(session, **kwargs)
+        db_obj = db_obj or await self.get(session, **kwargs)
         if db_obj is not None:
             obj_data = db_obj.dict()
             if isinstance(obj_in, dict):
@@ -66,7 +66,7 @@ class CRUDBase(Generic[ModelType, CreateSchemaType, UpdateSchemaType]):
     async def delete(
         self, session: AsyncSession, *args, db_obj: Optional[ModelType] = None, **kwargs
     ) -> ModelType:
-        db_obj = db_obj or self.get(session, *args, **kwargs)
+        db_obj = db_obj or await self.get(session, *args, **kwargs)
         await session.delete(db_obj)
         await session.commit()
         return db_obj
