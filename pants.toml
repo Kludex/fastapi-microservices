@@ -1,0 +1,32 @@
+[GLOBAL]
+pants_version = "2.6.1rc2"
+backend_packages = [
+    "pants.backend.python",
+    "pants.backend.python.lint.black",
+    "pants.backend.python.lint.isort",
+    "pants.backend.python.lint.flake8",
+    "pants.backend.python.typecheck.mypy",
+]
+
+[anonymous-telemetry]
+enabled = true
+repo_id = "0b797772-e5c1-4b91-81c5-069b5578acbe"
+
+[python-infer]
+inits = true
+
+[python-setup]
+interpreter_constraints = ["CPython==3.9.*"]
+
+[flake8]
+config = "setup.cfg"
+
+[isort]
+config = "setup.cfg"
+
+[mypy]
+config = "setup.cfg"
+version = "mypy==0.910"
+
+[black]
+version = "black==21.8b0"
