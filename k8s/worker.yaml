@@ -1,9 +1,9 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: users-worker-service
+  name: worker-service
   labels:
-    app: users-worker
+    app: worker
 spec:
   type: NodePort
   ports:
@@ -15,22 +15,22 @@ spec:
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: users-worker-deployment
+  name: worker-deployment
   labels:
-    app: users-worker
+    app: worker
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: users-worker
+      app: worker
   template:
     metadata:
       labels:
-        app: users-worker
+        app: worker
     spec:
       containers:
-        - name: users-worker
-          image: users-worker
+        - name: worker
+          image: kludex/worker
           ports:
             - containerPort: 8000
           env:
