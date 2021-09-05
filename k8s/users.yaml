@@ -61,7 +61,7 @@ spec:
             - name: POSTGRES_HOST
               value: "postgres-service"
         - name: perform-migrations
-          image: users
+          image: kludex/users
           command: ["alembic", "upgrade", "head"]
           env:
             - name: POSTGRES_HOST
@@ -76,7 +76,7 @@ spec:
                 name: postgres-configuration
       containers:
         - name: users
-          image: users
+          image: kludex/users
           ports:
             - containerPort: 80
           livenessProbe:

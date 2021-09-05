@@ -1,0 +1,40 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: worker-service
+  labels:
+    app: worker
+spec:
+  type: NodePort
+  ports:
+    - targetPort: 8000
+      port: 8000
+  selector:
+    app: users
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: worker-deployment
+  labels:
+    app: worker
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: worker
+  template:
+    metadata:
+      labels:
+        app: worker
+    spec:
+      containers:
+        - name: worker
+          image: kludex/worker
+          ports:
+            - containerPort: 8000
+          env:
+            - name: REDIS_HOST
+              value: "redis-service"
+            - name: REDIS_PORT
+              value: "6379"

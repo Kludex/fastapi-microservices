@@ -1,5 +1,8 @@
 # Python
 __pycache__
 
-# Skaffold
-tags.json
+# Pants workspace files
+/.pants.d/
+/dist/
+/.pids
+/.pants.workdir.file_lock*

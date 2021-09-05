@@ -1,0 +1,18 @@
+sqlalchemy==1.4.11
+asyncpg==0.22.0
+pyhumps==1.6.1
+alembic==1.5.8
+pydantic[email]@ https://github.com/samuelcolvin/pydantic/archive/b26d6f925b5b0e5077895334a203e539be105d30.tar.gz#egg=pydantic[email]
+passlib[bcrypt]==1.7.4
+python-jose==3.2.0
+python-multipart==0.0.5
+fastapi==0.63.0
+arq==0.22.0
+uvloop==0.15.2
+uvicorn==0.15.0
+pytest==6.2.3
+pytest-asyncio==0.15.0
+pytest-cov==2.11.1
+httpx==0.17.1
+asgi-lifespan==1.0.1
+gunicorn==20.1.0
