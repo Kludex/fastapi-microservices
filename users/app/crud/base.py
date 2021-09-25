@@ -1,6 +1,5 @@
 from typing import Any, Dict, Generic, List, Optional, Type, TypeVar, Union
 
-from fastapi.encoders import jsonable_encoder
 from pydantic import BaseModel
 from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
@@ -17,7 +16,7 @@ class CRUDBase(Generic[ModelType, CreateSchemaType, UpdateSchemaType]):
     async def create(
         self, session: AsyncSession, obj_in: CreateSchemaType
     ) -> ModelType:
-        obj_in_data = jsonable_encoder(obj_in)
+        obj_in_data = dict(obj_in)
         db_obj = self._model(**obj_in_data)
         session.add(db_obj)
         await session.commit()
