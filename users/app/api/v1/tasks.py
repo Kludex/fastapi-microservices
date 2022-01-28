@@ -1,10 +1,11 @@
 from arq.jobs import Job as ArqJob
-from fastapi import APIRouter
+from fastapi import APIRouter, Depends
 
+from app.api.deps import on_user
 from app.core import redis
 from app.schemas.job import Job
 
-router = APIRouter(prefix="/tasks", tags=["Tasks"])
+router = APIRouter(prefix="/tasks", tags=["Tasks"], dependencies=[Depends(on_user)])
 
 
 @router.post("/", response_model=Job, status_code=201)
