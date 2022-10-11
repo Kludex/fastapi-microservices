@@ -1,7 +1,7 @@
 # FastAPI Microservices
 
 > **Warning**
-> I don't have the bandwidth to maintain this project. If you want to help me, please send a message on #71. I'll happily onboard you.
+> I don't have the bandwidth to maintain this project. If you want to help me, please send a message on https://github.com/Kludex/fastapi-microservices/issues/71. I'll happily onboard you.
 
 This project was highly inspired on [tiangolo/full-stack-fastapi-postgresql](https://github.com/tiangolo/full-stack-fastapi-postgresql/).
 
