@@ -17,7 +17,7 @@ pytest-asyncio==0.15.0
 pytest-cov==2.11.1
 flake8==3.9.1
 isort==5.8.0
-black==20.8b1
+black==22.3.0
 mypy==0.812
 httpx==0.17.1
 asgi-lifespan==1.0.1
