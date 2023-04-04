@@ -71,7 +71,7 @@ async def create_non_superuser(session: AsyncSession) -> Dict[str, str]:
     return {"email": email, "password": password}
 
 
-@pytest.fixture()
+@pytest.fixture(scope="session")
 async def user_token_headers(client: AsyncClient, create_non_superuser: Dict[str, str]) -> Dict[str, str]:
     login_data = {
         "username": create_non_superuser["email"],
