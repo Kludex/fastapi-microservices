@@ -61,7 +61,7 @@ async def superuser_token_headers(client: AsyncClient) -> Dict[str, str]:
 @pytest.fixture()
 async def create_non_superuser(session: AsyncSession) -> Dict[str, str]:
     email = "test_user@test.com"
-    password = "Ksd8nASD1_Hjns!P"
+    password = "randomdummypassword"
     hashed_password = get_password_hash(password)
     result = await session.execute(select(User).where(User.email == email))
     user: Optional[User] = result.scalars().first()
