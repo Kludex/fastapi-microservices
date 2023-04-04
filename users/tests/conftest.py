@@ -58,8 +58,8 @@ async def superuser_token_headers(client: AsyncClient) -> Dict[str, str]:
     return {"Authorization": f"Bearer {access_token}"}
 
 
-@pytest.fixture()
-async def create_non_superuser(session: AsyncSession, scope="session") -> Dict[str, str]:
+@pytest.fixture(scope="session")
+async def create_non_superuser(session: AsyncSession) -> Dict[str, str]:
     email = "test_user@test.com"
     password = "Ksd8nASD1_Hjns!P"
     hashed_password = get_password_hash(password)
