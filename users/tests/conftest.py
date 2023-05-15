@@ -63,11 +63,8 @@ async def create_non_superuser(session: AsyncSession) -> Dict[str, str]:
     email = "test_user@test.com"
     password = "randomdummypassword"
     hashed_password = get_password_hash(password)
-    result = await session.execute(select(User).where(User.email == email))
-    user: Optional[User] = result.scalars().first()
-    if user is None:
-        session.add(User(email=email, hashed_password=hashed_password, is_superuser=False))
-        await session.commit()
+    session.add(User(email=email, hashed_password=hashed_password, is_superuser=False))
+    await session.commit()
     return {"email": email, "password": password}
 
 
