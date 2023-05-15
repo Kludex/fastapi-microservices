@@ -1,10 +1,9 @@
 import asyncio
-from typing import Dict, Optional
+from typing import Dict
 
 import pytest
 from asgi_lifespan import LifespanManager
 from httpx import AsyncClient
-from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncConnection, AsyncSession
 
 from app.api.deps import get_session
