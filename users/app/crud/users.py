@@ -3,4 +3,4 @@ from app.models.users import User
 from app.schemas.user import UserInDB, UserUpdateDB
 
 CRUDUser = CRUDBase[User, UserInDB, UserUpdateDB]
-crud_user = CRUDBase(User)
+crud_user = CRUDUser(User)
