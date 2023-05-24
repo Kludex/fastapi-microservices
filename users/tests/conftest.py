@@ -7,9 +7,11 @@ from httpx import AsyncClient
 from sqlalchemy.ext.asyncio import AsyncConnection, AsyncSession
 
 from app.api.deps import get_session
+from app.core.security import get_password_hash
 from app.core.config import settings
 from app.core.database import engine
 from app.main import app
+from app.models.users import User
 
 
 @pytest.fixture()
@@ -49,6 +51,27 @@ async def superuser_token_headers(client: AsyncClient) -> Dict[str, str]:
     login_data = {
         "username": settings.FIRST_USER_EMAIL,
         "password": settings.FIRST_USER_PASSWORD.get_secret_value(),
+    }
+    res = await client.post("/api/v1/login/", data=login_data)
+    access_token = res.json()["access_token"]
+    return {"Authorization": f"Bearer {access_token}"}
+
+
+@pytest.fixture()
+async def create_non_superuser(session: AsyncSession) -> Dict[str, str]:
+    email = "test_user@test.com"
+    password = "randomdummypassword"
+    hashed_password = get_password_hash(password)
+    session.add(User(email=email, hashed_password=hashed_password, is_superuser=False))
+    await session.commit()
+    return {"email": email, "password": password}
+
+
+@pytest.fixture()
+async def user_token_headers(client: AsyncClient, create_non_superuser: Dict[str, str]) -> Dict[str, str]:
+    login_data = {
+        "username": create_non_superuser["email"],
+        "password": create_non_superuser["password"],
     }
     res = await client.post("/api/v1/login/", data=login_data)
     access_token = res.json()["access_token"]
